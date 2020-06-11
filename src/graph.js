@@ -13,14 +13,13 @@ const bfs = function (pairs, source, target) {
   const visited = [];
   while (queue.length != 0) {
     const currentNode = queue.shift();
-    if (adjacencyTable[currentNode]) {
-      if (adjacencyTable[currentNode].includes(target)) return true;
-      adjacencyTable[currentNode].forEach((child) => {
-        const isAlreadyExist = queue.includes(child) || visited.includes(child);
-        if (!isAlreadyExist) queue.push(child);
-      });
-      visited.push(currentNode);
-    }
+    const adjacentNodes = adjacencyTable[currentNode] || [];
+    if (adjacentNodes.includes(target)) return true;
+    const uniqueNodes = adjacentNodes.filter(
+      (child) => !(queue.includes(child) || visited.includes(child))
+    );
+    queue.push(...uniqueNodes);
+    visited.push(currentNode);
   }
   return false;
 };
