@@ -8,7 +8,7 @@ const generateAdjacencyTable = (links) => {
 };
 
 const bfs = function (pairs, source, target) {
-  adjacencyTable = generateAdjacencyTable(pairs);
+  const adjacencyTable = generateAdjacencyTable(pairs);
   const queue = [source];
   const visited = [];
   while (queue.length != 0) {
@@ -16,7 +16,7 @@ const bfs = function (pairs, source, target) {
     if (adjacencyTable[currentNode]) {
       if (adjacencyTable[currentNode].includes(target)) return true;
       adjacencyTable[currentNode].forEach((child) => {
-        isAlreadyExist = queue.includes(child) || visited.includes(child);
+        const isAlreadyExist = queue.includes(child) || visited.includes(child);
         if (!isAlreadyExist) queue.push(child);
       });
       visited.push(currentNode);
